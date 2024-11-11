@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import io.quarkus.logging.Log;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -14,6 +15,7 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import org.acme.reservation.inventory.Car;
 import org.acme.reservation.inventory.InventoryClient;
+import org.acme.reservation.rental.Rental;
 import org.acme.reservation.rental.RentalClient;
 import org.acme.reservation.reservation.Reservation;
 import org.acme.reservation.reservation.ReservationsRepository;
@@ -44,7 +46,8 @@ public class ReservationResource {
         // this is just a dummy value for the time being
         String userId = "x";
         if (reservation.startDay.equals(LocalDate.now())) {
-            rentalClient.start(userId, result.id);
+            Rental rental = rentalClient.start(userId, result.id);
+            Log.info("Successfully started rental " + rental);
         }
         return result;
     }

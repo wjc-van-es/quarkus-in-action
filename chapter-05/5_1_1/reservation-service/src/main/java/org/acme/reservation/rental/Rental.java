@@ -32,4 +32,14 @@ public class Rental {
     public LocalDate getStartDate() {
         return startDate;
     }
+
+    @Override
+    public String toString() {
+        return "Rental{" +
+            "id=" + id +
+            ", userId='" + userId + '\'' +
+            ", reservationId=" + reservationId +
+            ", startDate=" + startDate +
+            '}';
+    }
 }
